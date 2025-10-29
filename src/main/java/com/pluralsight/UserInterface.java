@@ -97,13 +97,13 @@ public class UserInterface {
     }
 
     private void displayVehicles(List<Vehicle> inventory) {
-        System.out.printf("%n%40s%n%n", "--Vehicle Inventory--");
-        System.out.printf("%-6s | %-5s | %-15s | %-8s | %-8s | %-8s | %-8s | %8s%n",
+        System.out.printf("%n%55s%n%n", "--Vehicle Inventory--");
+        System.out.printf("%-6s | %-4s | %-12s | %-8s | %-8s | %-8s | %-8s | %9s%n",
                 "VIN", "Year", "Make", "Model", "Vehicle Type", "Color", "Mileage", "Price");
-        System.out.println("-".repeat(60));
+        System.out.println("-".repeat(88));
 
         for (Vehicle vehicle : inventory) {
-            System.out.printf("%-6s | %-5s | %-15s | %-8s | %-8s | %-8s | %-8s | %8s%n",
+            System.out.printf("%-6s | %-4s | %-12s | %-8s | %-12s | %-8s | %-8s | %9s%n",
                     vehicle.getVin(),
                     vehicle.getYear(),
                     vehicle.getMake(),
