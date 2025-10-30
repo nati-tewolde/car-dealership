@@ -1,19 +1,25 @@
-# Project Title
+# Car Dealership 
 
-## Description of the Project
+## Project Overview
 
-Briefly describe what this Java console application does. Mention its purpose and who the intended users are. Explain the main functionality and what problems it aims to solve.
-
+Car Dealership is a Java-based command-line application that simulates the operations of a car dealership system. 
+It allows users to browse and search a dealership’s vehicle inventory by various criteria such as price range, make/model, year, color, mileage, and type. 
+Users can view all available vehicles, add new listings, or remove existing ones, with all updates automatically saved to a dealership data file.
 ## User Stories
 
-List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
-
-- As a user, I want to be able to input my data, so that the application can process it accordingly.
-- As a user, I want to receive immediate feedback, so I can understand what to do next.
+- As a user, I want to view all vehicles in the dealership's inventory, so that I can quickly scan available stock.
+- As a salesperson, I want to search for vehicles between a minimum and maximum price, so that I can show customers cars that fit their budget.
+- As a salesperson, I want to search by vehicle make and/or model, so that I can quickly locate specific brands.
+- As a salesperson, I want to filter vehicles between two years, so that I can show customers newer or older models.
+- As a salesperson, I want to find all vehicles of a given color, so that I can meet customer style preferences.
+- As a salesperson, I want to filter cars by mileage range, so that I can show vehicles with acceptable wear.
+- As a salesperson, I want to find vehicles by their type, so that I can focus on what category the customer prefers.
+- As a manager, I want to add a new vehicle to the inventory, so that I can expand available listings.
+- As a manager, I want to remove a vehicle from inventory, so that I can keep the dealership's inventory accurate.
 
 ## Setup
 
-Instructions on how to set up and run the project using IntelliJ IDEA.
+Instructions on how to set up and run the project using IntelliJ IDEA:
 
 ### Prerequisites
 
@@ -32,37 +38,28 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Technologies Used
 
-- Java: Mention the version you are using.
-- Any additional libraries or frameworks used in the project.
+- Java: Amazon Corretto 17.0.16
 
 ## Demo
 
-Include screenshots or GIFs that show your application in action. Use tools like [Giphy Capture](https://giphy.com/apps/giphycapture) to record a GIF of your application.
-
-![Application Screenshot](path/to/your/screenshot.png)
+![Application Demo](./workshop3-demo.gif)
 
 ## Future Work
 
-Outline potential future enhancements or functionalities you might consider adding:
-
-- Additional feature to be developed.
-- Improvement of current functionalities.
+- Custom search incorporating various filters.
+- Export/import filtered search results.
+- Introduce roles (managers can modify and customers can only view).
 
 ## Resources
 
-List resources such as tutorials, articles, or documentation that helped you during the project.
-
-- [Java Programming Tutorial](https://www.example.com)
-- [Effective Java](https://www.example.com)
+- [Potato Sensei - OpenAI: ChatGpt 5 LLM](https://chatgpt.com/g/g-681d378b0c90819197b16e49abe384ec-potato-sensei)
+- [Capstone 1: Financial Tracker Repository](https://github.com/nati-tewolde/financial-tracker)
+- [Workshop 2: Online Store](https://github.com/nati-tewolde/online-store)
 
 ## Team Members
 
-- **Name 1** - Specific contributions or roles.
-- **Name 2** - Specific contributions or roles.
+- **Natnael Tewolde:** Main Contributor
 
 ## Thanks
 
-Express gratitude towards those who provided help, guidance, or resources:
-
-- Thank you to [Mentor's Name] for continuous support and guidance.
-- A special thanks to all teammates for their dedication and teamwork.
+- Once again, thank you to both *potato senseis* for your continuous support and guidance!
