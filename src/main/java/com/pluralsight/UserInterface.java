@@ -45,8 +45,8 @@ public class UserInterface {
                 case 5 -> processGetByMileageRequest(scanner);
                 case 6 -> processGetByVehicleTypeRequest(scanner);
                 case 7 -> processGetAllVehiclesRequest();
-                case 8 -> processAddVehicleRequest();
-                case 9 -> processRemoveVehicleRequest();
+                case 8 -> processAddVehicleRequest(scanner);
+                case 9 -> processRemoveVehicleRequest(scanner);
                 case 99 -> System.out.println("\nExiting application ...");
                 default -> System.out.println("\nInvalid selection: please enter a valid selection.");
             }
@@ -55,28 +55,28 @@ public class UserInterface {
     }
 
     public void processGetByPriceRequest(Scanner scanner) {
-        int minPrice;
+        double minPrice;
         while (true) {
             System.out.print("\nEnter minimum price: ");
-            if (!scanner.hasNextInt()) {
+            if (!scanner.hasNextDouble()) {
                 System.out.println("\nInvalid selection: please enter a numeric value for price.");
                 scanner.nextLine();
                 continue;
             }
-            minPrice = scanner.nextInt();
+            minPrice = scanner.nextDouble();
             scanner.nextLine();
             break;
         }
 
-        int maxPrice;
+        double maxPrice;
         while (true) {
             System.out.print("\nEnter maximum price: ");
-            if (!scanner.hasNextInt()) {
+            if (!scanner.hasNextDouble()) {
                 System.out.println("\nInvalid selection: please enter a numeric value for price.");
                 scanner.nextLine();
                 continue;
             }
-            maxPrice = scanner.nextInt();
+            maxPrice = scanner.nextDouble();
             scanner.nextLine();
             break;
         }
@@ -224,12 +224,134 @@ public class UserInterface {
         displayVehicles(dealership.getAllVehicles());
     }
 
-    public void processAddVehicleRequest() {
+    public void processAddVehicleRequest(Scanner scanner) {
+        int vin;
+        while (true) {
+            System.out.print("\nEnter vin to begin adding vehicle: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("\nInvalid selection: please enter a numeric value for vin.");
+                scanner.nextLine();
+                continue;
+            }
+            vin = scanner.nextInt();
+            scanner.nextLine();
+            break;
+        }
 
+        int year;
+        while (true) {
+            System.out.print("\nEnter year: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("\nInvalid selection: please enter a numeric value for year.");
+                scanner.nextLine();
+                continue;
+            }
+            year = scanner.nextInt();
+            scanner.nextLine();
+            break;
+        }
+
+        String make;
+        while (true) {
+            System.out.print("\nEnter vehicle make: ");
+            make = scanner.nextLine().trim();
+            if (make.isEmpty()) {
+                System.out.println("\nField cannot be empty.");
+                continue;
+            }
+            break;
+        }
+
+        String model;
+        while (true) {
+            System.out.print("\nEnter vehicle model: ");
+            model = scanner.nextLine().trim();
+            if (model.isEmpty()) {
+                System.out.println("\nField cannot be empty.");
+                continue;
+            }
+            break;
+        }
+
+        String type;
+        while (true) {
+            System.out.print("\nEnter vehicle type: ");
+            type = scanner.nextLine().trim();
+            if (type.isEmpty()) {
+                System.out.println("\nField cannot be empty.");
+                continue;
+            }
+            break;
+        }
+
+        String color;
+        while (true) {
+            System.out.print("\nEnter vehicle color: ");
+            color = scanner.nextLine().trim();
+            if (color.isEmpty()) {
+                System.out.println("\nField cannot be empty.");
+                continue;
+            }
+            break;
+        }
+
+        int mileage;
+        while (true) {
+            System.out.print("\nEnter vehicle mileage: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("\nInvalid selection: please enter a numeric value for mileage.");
+                scanner.nextLine();
+                continue;
+            }
+            mileage = scanner.nextInt();
+            scanner.nextLine();
+            break;
+        }
+
+        double price;
+        while (true) {
+            System.out.print("\nEnter vehicle price: ");
+            if (!scanner.hasNextDouble()) {
+                System.out.println("\nInvalid selection: please enter a numeric value for price.");
+                scanner.nextLine();
+                continue;
+            }
+            price = scanner.nextDouble();
+            scanner.nextLine();
+            break;
+        }
+
+        Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, mileage, price);
+        DealershipFileManager dealershipFileManager = new DealershipFileManager();
+
+        dealership.addVehicle(vehicle);
+        dealershipFileManager.saveDealership(dealership);
+
+        System.out.println("\nVehicle successfully added!");
     }
 
-    public void processRemoveVehicleRequest() {
+    public void processRemoveVehicleRequest(Scanner scanner) {
+        int vin;
+        while (true) {
+            System.out.print("\nEnter vin to remove vehicle from inventory: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("\nInvalid selection: please enter a numeric value for vin.");
+                scanner.nextLine();
+                continue;
+            }
+            vin = scanner.nextInt();
+            scanner.nextLine();
+            break;
+        }
 
+        DealershipFileManager dealershipFileManager = new DealershipFileManager();
+
+        if (!dealership.removeVehicle(vin)) {
+            System.out.println("\nVIN not found.");
+        } else {
+            dealershipFileManager.saveDealership(dealership);
+            System.out.println("\nVehicle successfully removed.");
+        }
     }
 
     private void init() {
@@ -252,9 +374,8 @@ public class UserInterface {
                     vehicle.getVehicleType(),
                     vehicle.getColor(),
                     vehicle.getOdometer(),
-                    String.format("$%.2f", vehicle.getPrice()));
+                    String.format("$%.1f", vehicle.getPrice()));
         }
 
     }
-
 }

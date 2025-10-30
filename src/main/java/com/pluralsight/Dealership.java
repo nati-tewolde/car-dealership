@@ -41,7 +41,7 @@ public class Dealership {
         this.phone = phone;
     }
 
-    public List<Vehicle> getVehiclesByPrice(int min, int max) {
+    public List<Vehicle> getVehiclesByPrice(double min, double max) {
        List<Vehicle> matchingVehicles = new ArrayList<>();
 
         for (Vehicle vehicle : inventory) {
@@ -116,8 +116,17 @@ public class Dealership {
         this.inventory.add(vehicle);
     }
 
-    public void removeVehicle(Vehicle vehicle) {
+    public boolean removeVehicle(int vin) {
+        // Avoids ConcurrentModificationException and returns boolean
+        return inventory.removeIf(vehicles -> vehicles.getVin() == vin);
 
+        /*boolean isMatched = false;
+        for (Vehicle vehicles : inventory) {
+            if (vehicles.getVin() == vin) {
+                this.inventory.remove(vehicles);
+                isMatched = true;
+            }
+        }
+        return isMatched;*/
     }
-
 }
