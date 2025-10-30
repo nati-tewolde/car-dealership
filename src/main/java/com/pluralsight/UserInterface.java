@@ -1,6 +1,5 @@
 package com.pluralsight;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,7 +30,7 @@ public class UserInterface {
             System.out.print("Enter your selection: ");
 
             if (!scanner.hasNextInt()) {
-                System.out.println("\nInvalid selection, please enter a valid selection.");
+                System.out.println("\nInvalid selection: please enter a corresponding numeric option.");
                 scanner.nextLine();
                 continue;
             }
@@ -39,44 +38,186 @@ public class UserInterface {
             scanner.nextLine();
 
             switch (choice) {
-                case 1 -> processGetByPriceRequest();
-                case 2 -> processGetByMakeModelRequest();
-                case 3 -> processGetByYearRequest();
-                case 4 -> processGetByColorRequest();
-                case 5 -> processGetByMileageRequest();
-                case 6 -> processGetByVehicleTypeRequest();
+                case 1 -> processGetByPriceRequest(scanner);
+                case 2 -> processGetByMakeModelRequest(scanner);
+                case 3 -> processGetByYearRequest(scanner);
+                case 4 -> processGetByColorRequest(scanner);
+                case 5 -> processGetByMileageRequest(scanner);
+                case 6 -> processGetByVehicleTypeRequest(scanner);
                 case 7 -> processGetAllVehiclesRequest();
                 case 8 -> processAddVehicleRequest();
                 case 9 -> processRemoveVehicleRequest();
                 case 99 -> System.out.println("\nExiting application ...");
-                default -> System.out.println("\nInvalid selection.");
+                default -> System.out.println("\nInvalid selection: please enter a valid selection.");
             }
         }
         scanner.close();
     }
 
-    public void processGetByPriceRequest() {
+    public void processGetByPriceRequest(Scanner scanner) {
+        int minPrice;
+        while (true) {
+            System.out.print("\nEnter minimum price: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("\nInvalid selection: please enter a numeric value for price.");
+                scanner.nextLine();
+                continue;
+            }
+            minPrice = scanner.nextInt();
+            scanner.nextLine();
+            break;
+        }
 
+        int maxPrice;
+        while (true) {
+            System.out.print("\nEnter maximum price: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("\nInvalid selection: please enter a numeric value for price.");
+                scanner.nextLine();
+                continue;
+            }
+            maxPrice = scanner.nextInt();
+            scanner.nextLine();
+            break;
+        }
+
+        List<Vehicle> matchingVehicles = dealership.getVehiclesByPrice(minPrice, maxPrice);
+
+        if (matchingVehicles.isEmpty()) {
+            System.out.println("\nNo vehicles found within that price range.");
+        } else {
+            displayVehicles(matchingVehicles);
+        }
     }
 
-    public void processGetByMakeModelRequest() {
+    public void processGetByMakeModelRequest(Scanner scanner) {
+        System.out.print("\nEnter vehicle make: ");
+        String make = scanner.nextLine().trim();
 
+        System.out.print("\nEnter vehicle model: ");
+        String model = scanner.nextLine().trim();
+
+        List<Vehicle> matchingVehicles = dealership.getVehiclesByMakeModel(make, model);
+
+        if (matchingVehicles.isEmpty()) {
+            System.out.println("\nNo vehicles found matching that make/model.");
+        } else {
+            displayVehicles(matchingVehicles);
+        }
     }
 
-    public void processGetByYearRequest() {
+    public void processGetByYearRequest(Scanner scanner) {
+        int minYear;
+        while (true) {
+            System.out.print("\nEnter minimum year: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("\nInvalid selection: please enter a numeric value for year.");
+                scanner.nextLine();
+                continue;
+            }
+            minYear = scanner.nextInt();
+            scanner.nextLine();
+            break;
+        }
 
+        int maxYear;
+        while (true) {
+            System.out.print("\nEnter maximum year: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("\nInvalid selection: please enter a numeric value for year.");
+                scanner.nextLine();
+                continue;
+            }
+            maxYear = scanner.nextInt();
+            scanner.nextLine();
+            break;
+        }
+
+        List<Vehicle> matchingVehicles = dealership.getVehiclesByYear(minYear, maxYear);
+
+        if (matchingVehicles.isEmpty()) {
+            System.out.println("\nNo vehicles found within that date range.");
+        } else {
+            displayVehicles(matchingVehicles);
+        }
     }
 
-    public void processGetByColorRequest() {
+    public void processGetByColorRequest(Scanner scanner) {
+        String color;
+        while (true) {
+            System.out.print("\nEnter vehicle color: ");
+            color = scanner.nextLine().trim();
+            if (color.isEmpty()) {
+                System.out.println("\nField cannot be empty.");
+                continue;
+            }
+            break;
+        }
 
+        List<Vehicle> matchingVehicles = dealership.getVehiclesByColor(color);
+
+        if (matchingVehicles.isEmpty()) {
+            System.out.println("\nNo vehicles found matching that color.");
+        } else {
+            displayVehicles(matchingVehicles);
+        }
     }
 
-    public void processGetByMileageRequest() {
+    public void processGetByMileageRequest(Scanner scanner) {
+        int minMileage;
+        while (true) {
+            System.out.print("\nEnter minimum mileage: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("\nInvalid selection: please enter a numeric value for mileage.");
+                scanner.nextLine();
+                continue;
+            }
+            minMileage = scanner.nextInt();
+            scanner.nextLine();
+            break;
+        }
 
+        int maxMileage;
+        while (true) {
+            System.out.print("\nEnter maximum mileage: ");
+            if (!scanner.hasNextInt()) {
+                System.out.println("\nInvalid selection: please enter a numeric value for mileage.");
+                scanner.nextLine();
+                continue;
+            }
+            maxMileage = scanner.nextInt();
+            scanner.nextLine();
+            break;
+        }
+
+        List<Vehicle> matchingVehicles = dealership.getVehiclesByMileage(minMileage, maxMileage);
+
+        if (matchingVehicles.isEmpty()) {
+            System.out.println("\nNo vehicles found within that mileage range.");
+        } else {
+            displayVehicles(matchingVehicles);
+        }
     }
 
-    public void processGetByVehicleTypeRequest() {
+    public void processGetByVehicleTypeRequest(Scanner scanner) {
+        String vehicleType;
+        while (true) {
+            System.out.print("\nEnter vehicle type: ");
+            vehicleType = scanner.nextLine().trim();
+            if (vehicleType.isEmpty()) {
+                System.out.println("\nField cannot be empty.");
+                continue;
+            }
+            break;
+        }
 
+        List<Vehicle> matchingVehicles = dealership.getVehiclesByType(vehicleType);
+
+        if (matchingVehicles.isEmpty()) {
+            System.out.println("\nNo vehicles found matching that type.");
+        } else {
+            displayVehicles(matchingVehicles);
+        }
     }
 
     public void processGetAllVehiclesRequest() {
